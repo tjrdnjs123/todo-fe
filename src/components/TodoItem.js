@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import api from "../utils/api";
 
-const TodoItem = ({ item, deleteTask, toggleComplete }) => {
+const TodoItem = ({ item, deleteItem, toggleComplete }) => {
   // const deleteTask = async () => {
   //   const response = api.delete(`/tasks/${todoList[key]._id}`);
   //   console.log("r", response);
@@ -17,7 +17,7 @@ const TodoItem = ({ item, deleteTask, toggleComplete }) => {
           <div>
             <button
               className="button-delete"
-              onClick={() => deleteTask(item._id)}
+              onClick={() => deleteItem(item._id)}
             >
               삭제
             </button>
