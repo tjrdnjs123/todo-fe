@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import api from "../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [secondPassword, setSecondPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -18,6 +20,7 @@ const RegisterPage = () => {
       }
       const response = await api.post("/user", { name, email, password });
       console.log("rrr", response);
+      navigate('/login')
     } catch (error) {
       setError(error.message);
     }
