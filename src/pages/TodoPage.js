@@ -4,13 +4,16 @@ import api from "../utils/api";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
 
-const TodoPage = () => {
+const TodoPage = ({setUser}) => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
+  const navigate = useNavigate();
 
   const getTasks = async () => {
     const response = await api.get("/tasks");
+    console.log('response.data.data',response.data.data)
     setTodoList(response.data.data);
   };
   useEffect(() => {
@@ -57,8 +60,15 @@ const TodoPage = () => {
       console.log("error", error);
     }
   };
+  const logout = () => {
+    sessionStorage.removeItem("token"); // 세션스토리지에서 토큰 삭제
+    setUser(null);
+    navigate("/login"); // 로그인 페이지로 리디렉션
+  };
+  
   return (
     <Container>
+      <button onClick={logout}>로그아웃</button>
       <Row className="add-item-row">
         <Col xs={12} sm={10}>
           <input
